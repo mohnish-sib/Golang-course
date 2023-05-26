@@ -22,29 +22,38 @@ func main()  {
 }
 
 func readSting(s string) string  {
-	fmt.Println(s)
-	fmt.Print("-> ")
 
-	userInput, _ := reader.ReadString('\n')
-	userInput =strings.Replace(userInput,"\r\n","",-1)
-	userInput =strings.Replace(userInput,"\n","",-1)
+	for { 
+		fmt.Println(s)
+		fmt.Print("-> ")
 
-	return userInput
+		userInput, _ := reader.ReadString('\n')
+		userInput =strings.Replace(userInput,"\r\n","",-1)
+		userInput =strings.Replace(userInput,"\n","",-1)
+
+		if userInput == ""{
+			fmt.Println("Pls enter yor name")
+		} else{
+			return userInput
+		}
+	}
 }
 
 func readInt(s string) int  {
-	fmt.Println(s)
-	fmt.Print("-> ")
+	for {
+		fmt.Println(s)
+		fmt.Print("-> ")
 
-	userInput, _ := reader.ReadString('\n')
-	userInput =strings.Replace(userInput,"\r\n","",-1)
-	userInput =strings.Replace(userInput,"\n","",-1)
+		userInput, _ := reader.ReadString('\n')
+		userInput =strings.Replace(userInput,"\r\n","",-1)
+		userInput =strings.Replace(userInput,"\n","",-1)
 
-	num, err:=strconv.Atoi(userInput)// conert string into number
+		num, err:=strconv.Atoi(userInput)// conert string into number
 
-	if err != nil{
-		fmt.Println("Please enter a whole number")
+		if err != nil {
+			fmt.Println("Please enter a whole number")
+		} else {
+			return num
+		}
 	}
-
-	return num
 }
