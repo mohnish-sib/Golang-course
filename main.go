@@ -3,9 +3,12 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 	"strings"
+
+	"github.com/eiannone/keyboard"
 )
 
 var reader *bufio.Reader
@@ -98,18 +101,42 @@ func readFloat(s string) float64  {
 }
 
 func readBool(s string) bool  {
+	// for {
+	// 	fmt.Println(s)
+	// 	fmt.Print("-> ")
+
+	// 	userInput, _ := reader.ReadString('\n')
+	// 	userInput =strings.Replace(userInput,"\r\n","",-1)
+	// 	userInput =strings.Replace(userInput,"\n","",-1)
+
+	// 	if userInput != "y" && userInput !="n" {
+	// 		fmt.Println("Please enter y or n")
+	// 	} else {
+	// 		return userInput == "y"
+	// 	}
+	// }
+	err := keyboard.Open()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer func() { // to close the keyboard
+		_ = keyboard.Close() // discard the error
+	}() 	// when we have a anoymous fn ther should be ()
+
 	for {
 		fmt.Println(s)
-		fmt.Print("-> ")
+		char, _, err := keyboard.GetSingleKey() //discard 2nd return val
+		if err != nil {
+			log.Fatal((err))
+		}
 
-		userInput, _ := reader.ReadString('\n')
-		userInput =strings.Replace(userInput,"\r\n","",-1)
-		userInput =strings.Replace(userInput,"\n","",-1)
-
-		if userInput != "y" && userInput !="n" {
+		if strings.ToLower(string(char)) != "y" && strings.ToLower(string(char)) != "n" {
 			fmt.Println("Please enter y or n")
-		} else {
-			return userInput == "y"
+		} else if char == 'n' || char == 'N'{
+			return false
+		} else if char =='y' || char == 'Y' {
+			return true
 		}
 	}
 }
