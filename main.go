@@ -18,7 +18,12 @@ func main()  {
 	age:=readInt("Your age?")
 
 	fmt.Println("Your name is",userName, "and your age is", age)
-	
+	fmt.Println("Your name is " + userName + " and your age is", age) // + sign don't add extra space, but it is slower as compare to the above. It takes more space also
+//and we can't use + with int and string(i.e. two different types)
+
+	// fmt.Println(fmt.Sprintf("Your name is %s. You are %d years old.",userName,age)) // this is must faster
+	fmt.Printf("Your name is %s. You are %d years old.\n",userName,age) // better
+
 }
 
 func readSting(s string) string  {
