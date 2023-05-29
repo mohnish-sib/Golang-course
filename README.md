@@ -22,3 +22,9 @@ $ rm .git/index
 ```
 $ rm -r *
 ```
+
+### Useful links
+
+- [ ] [Arithmetic Operators](https://www.golangprograms.com/arithmetic-operators-in-go-programming-language.html)
+- [ ]  [Arithmetic Operators](https://go.dev/ref/spec#Arithmetic_operators)
+- [ ] [Operators Precedence](https://www.tutorialspoint.com/go/go_operators_precedence.htm)
