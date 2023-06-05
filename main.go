@@ -7,6 +7,8 @@ import (
 	"myapp/rps"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
 )
 
 func homePage(w http.ResponseWriter, r *http.Request) {
@@ -27,11 +29,14 @@ func playRound(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/play", playRound)
-	http.HandleFunc("/", homePage)
+
+	myRouter := mux.NewRouter().StrictSlash(true)
+
+	myRouter.HandleFunc("/play", playRound).Methods("GET")  //Methods() is not compulsory, but if we give it will only be for that method
+	myRouter.HandleFunc("/", homePage)
 
 	log.Println("Starting web server on port 8080")
-	http.ListenAndServe(":8080", nil)
+	log.Fatal(http.ListenAndServe(":8080", myRouter))
 }
 
 func renderTemplate(w http.ResponseWriter, page string) {
